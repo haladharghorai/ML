@@ -1,0 +1,51 @@
+import csv
+import matplotlib.pyplot as plt
+
+
+
+average_student = {
+    "90+": 0,
+    "80-89": 0,
+    "70-79": 0,
+    "Below 70": 0
+}
+
+
+with open("studentsmarks.csv", "r") as file:
+
+    reader = csv.DictReader(file)
+
+    for row in reader:
+
+        math = int(row["Math"])
+        physics = int(row["Physics"])
+        chemistry = int(row["Chemistry"])
+        computer = int(row["Computer Science"])
+
+        
+        average = (math + physics + chemistry + computer) / 4
+
+        if average >= 90:
+            average_student["90+"] += 1
+
+        elif average >= 80:
+            average_student["80-89"] += 1
+
+        elif average >= 70:
+           average_student["70-79"] += 1
+
+        else:
+            average_student["Below 70"] += 1
+
+
+
+number = list(average_student.keys())
+students = list(average_student.values())
+
+plt.bar(number, students)
+
+plt.xlabel("Average Marks")
+plt.ylabel("Number of Students")
+plt.title("Students Average Marks")
+
+plt.show()
